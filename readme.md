@@ -41,4 +41,4 @@ We use this term to describe the capability of handling the phase space dimensio
 * **2D2V** (with or without external perpendicual B field supported, **Serial** and **Parallel**) 
 
 ![](./pics/scheme/schematic_vlasov.png)
-*A schematic figure for 2D2V Vlasolver calculation domain*
+<center>A schematic figure for 2D2V Vlasolver calculation domain</center>
