@@ -25,7 +25,7 @@ The  electric potential. <img src="https://rawgit.com/ChenCuiPlasma/Vlasolver_Fl
 The macroscopic properties of the plasma are described  by the moments  of the VDF
 <p align="center"><img src="https://rawgit.com/ChenCuiPlasma/Vlasolver_Flyer/master/svgs/43a1813b0415fff8bef1223496e3815b.svg?invert_in_darkmode" align=middle width=165.8844pt height=39.588615pt/></p>
 
-## 3. **Simulation Methods**
+## 3. **Simulation Methods and Computing Algorithm**
 The phase space(both physical and velocity space) will be discretized into computational mesh. The partial differential equations in the Vlasov-Poisson system will be solved directly on the mesh. While the Vlasov-Poisson system  is a non-linear system, the Vlasov equation itself is a first-order hyperbolic partial differential equation (PDE).  Many numerical schemes have been developed to  solve hyperbolic PDEs.
 
 The methods below are used to discretize the PDEs to numerically solve the Vlasov-Poisson system above.
@@ -35,10 +35,51 @@ The methods below are used to discretize the PDEs to numerically solve the Vlaso
 
 We use this term to describe the capability of handling the phase space dimensions: **xDyV** (x physical domain dimensions and y velocity domain dimensions). 
 
-## 4. **Current Supported Phase Space Dimensions**
+The code will solve the Vlasov-Poisson system in the following process [2]:
+
+1. Solve the spatial advection equations 
+   $$
+   \frac{\partial f}{\partial t}+\boldsymbol{v}\cdot\nabla f=0
+   $$
+   for half the time step: 
+   $$
+   f^{\star}(\boldsymbol{x},\boldsymbol{v})=f^{n}(\boldsymbol{x}-\boldsymbol{v}\Delta t/2,\boldsymbol{v}))
+   $$
+2. Update the Poisson equation:
+   $$
+   \nabla^2\phi=-\frac{\rho}{\epsilon_0}
+   $$
+3. Solve the acceleration equations:
+   $$
+   \frac{\partial f}{\partial t}+\boldsymbol{a}\cdot\nabla f=0
+   $$
+   for the whole time step:
+   $$
+   f^{\star\star}(\boldsymbol{x},\boldsymbol{v})=f^{\star\star}(\boldsymbol{x},\boldsymbol{v}^\star))
+   $$
+   where the $v^\star$ is the solution of the characteristics of the acceleration equations.
+4. Solve the spatial advection equations 
+   $$
+   \frac{\partial f}{\partial t}+\boldsymbol{v}\cdot\nabla f=0
+   $$
+   for half the time step: 
+   $$
+   f^{n+1}(\boldsymbol{x},\boldsymbol{v})=f^{\star\star}(\boldsymbol{x}-\boldsymbol{v}\Delta t/2,\boldsymbol{v}))
+   $$
+
+## 4. **Current Capabilities Phase Space Dimensions**
 
 * **1D1V** (**Serial** and **Parallel**)
-* **2D2V** (with or without external perpendicual B field supported, **Serial** and **Parallel**) 
+* **2D2V** (with or without external B field both supported, **Serial** and **Parallel**) 
 
 ![](./pics/scheme/schematic_vlasov.png)
 >*A schematic figure for 2D2V Vlasolver calculation domain*
+
+## 6. **Parallelization**
+Vlasolver is currently parallelized by doing domain decomposition  in physical domain. The physical domain is decomposed into local domains and assigned to the corresponding process. Informations are changed and stored in each local domain's guard cells. The velocity is not decomposed now and each process have a full set of velocity space. It is in the plan that in the future the shared-memory parallelization techniques or the heterogeneous computing techniques can be used to parallize the velocity space.
+
+---
+## **Reference**
+[1] Filbet, F., Sonnendrücker, E. and Bertrand, P., 2001. Conservative numerical schemes for the Vlasov equation. Journal of Computational Physics, 172(1), pp.166-187.
+
+[2] Cheng, C.Z. and Knorr, G., 1976. The integration of the Vlasov equation in configuration space. Journal of Computational Physics, 22(3), pp.330-351.
