@@ -31,4 +31,13 @@ The phase space(both physical and velocity space) will be discretized into compu
 The methods below are used to discretize the PDEs to numerically solve the Vlasov-Poisson system above.
 
 * Semi-Lagrangian time stepping.
-* Third Order Positive Flux Conservation<img src="https://rawgit.com/ChenCuiPlasma/Vlasolver_Flyer/master/svgs/7ddfcb3a9d87220a509b7bbfffdd6dcc.svg?invert_in_darkmode" align=middle width=6.528109500000001pt height=26.70657pt/> method on phase domain discretization. 
+* Third Order Positive Flux Conservation[1] method on phase domain discretization. 
+
+We use this term to describe the capability of handling the phase space dimensions: **xDyV** (x physical domain dimensions and y velocity domain dimensions). 
+
+## 4. **Current Supported Phase Space Dimensions**
+
+* **1D1V** (**Serial** and **Parallel**)
+* **2D2V** (with or without external perpendicual B field supported, **Serial** and **Parallel**) 
+
+![](./Miscellenous/pics/scheme/schematic_vlasov.png)
