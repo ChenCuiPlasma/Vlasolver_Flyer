@@ -30,6 +30,7 @@ The phase space(both physical and velocity space) will be discretized into compu
 
 The methods below are used to discretize the PDEs to numerically solve the Vlasov-Poisson system above.
 
+* Operator Splitting.
 * Semi-Lagrangian time stepping.
 * Third Order Positive Flux Conservation[1] method on phase domain discretization. 
 
