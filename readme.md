@@ -26,3 +26,9 @@ The macroscopic properties of the plasma are described  by the moments  of the V
 <p align="center"><img src="https://rawgit.com/ChenCuiPlasma/Vlasolver_Flyer/master/svgs/43a1813b0415fff8bef1223496e3815b.svg?invert_in_darkmode" align=middle width=165.8844pt height=39.588615pt/></p>
 
 ## 3. **Simulation Methods**
+The phase space(both physical and velocity space) will be discretized into computational mesh. The partial differential equations in the Vlasov-Poisson system will be solved directly on the mesh. While the Vlasov-Poisson system  is a non-linear system, the Vlasov equation itself is a first-order hyperbolic partial differential equation (PDE).  Many numerical schemes have been developed to  solve hyperbolic PDEs.
+
+The methods below are used to discretize the PDEs to numerically solve the Vlasov-Poisson system above.
+
+* Semi-Lagrangian time stepping.
+* Third Order Positive Flux Conservation<img src="https://rawgit.com/ChenCuiPlasma/Vlasolver_Flyer/master/svgs/7ddfcb3a9d87220a509b7bbfffdd6dcc.svg?invert_in_darkmode" align=middle width=6.528109500000001pt height=26.70657pt/> method on phase domain discretization. 
