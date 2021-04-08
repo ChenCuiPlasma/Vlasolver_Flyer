@@ -80,7 +80,7 @@ The code adopts objective-oriented structure. And the classes(modules) can be ca
 4. Vlasov Solver:
    * Vlasov class
    * InitialFun class(For initial condition and boundary condition implementations)
-5. Diagnostic Modules:
+5. Diagnostic:
    * Diagnostics class
 
 
