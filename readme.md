@@ -53,7 +53,7 @@ The code will solve the Vlasov-Poisson system in the following process [2]:
 
 1. Solve the spatial advection equations 
 <p align="center"><img src="https://rawgit.com/ChenCuiPlasma/Vlasolver_Flyer/master/svgs/34fa5b6ae77d6ac2f41f1872990baaa5.svg?invert_in_darkmode" align=middle width=116.74574999999999pt height=33.769394999999996pt/></p>
-&nbsp;for half the time step: 
+&nbsp;&nbsp;for half the time step: 
 <p align="center"><img src="https://rawgit.com/ChenCuiPlasma/Vlasolver_Flyer/master/svgs/4402889f6676055244687bcf55f8626a.svg?invert_in_darkmode" align=middle width=235.17119999999997pt height=18.269295pt/></p>
 
 ## 4. **Current Capabilities Phase Space Dimensions**
