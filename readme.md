@@ -56,7 +56,7 @@ The code will solve the Vlasov-Poisson system in the following process [2]:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for half the time step: 
 <p align="center"><img src="https://rawgit.com/ChenCuiPlasma/Vlasolver_Flyer/master/svgs/4402889f6676055244687bcf55f8626a.svg?invert_in_darkmode" align=middle width=235.17119999999997pt height=18.269295pt/></p>
 
-## 4. **Current Capabilities Phase Space Dimensions**
+## 4. **Current Capabilities of Phase Space Dimensions**
 
 * **1D1V** (**Serial** and **Parallel**)
 * **2D2V** (with or without external B field both supported, **Serial** and **Parallel**) 
@@ -64,8 +64,32 @@ The code will solve the Vlasov-Poisson system in the following process [2]:
 ![](./pics/scheme/schematic_vlasov.png)
 >*A schematic figure for 2D2V Vlasolver calculation domain*
 
+## 5. **Code Structures**
+The code adopts objective-oriented structure. And the classes(modules) can be categorized into several groups. 
+1. Utilities:
+   * Control class
+   * Mesh class
+   * ParallelControl class(If parallelization enabled, all of the MPI functions used in this code are wrapped here.)
+   * LocalMesh class(If parallelization enabled)
+2. Containers:
+   * ScalarField class
+   * VectorField class
+   * FunctionField class
+3. Poisson Solver:
+   * Poisson class
+4. Vlasov Solver:
+   * Vlasov class
+   * InitialFun class(For initial condition and boundary condition implementations)
+5. Diagnostic Modules:
+   * Diagnostics class
+
+
 ## 6. **Parallelization**
 Vlasolver is currently parallelized by doing domain decomposition  in physical domain. The physical domain is decomposed into local domains and assigned to the corresponding process. Informations are changed and stored in each local domain's guard cells. The velocity is not decomposed now and each process have a full set of velocity space. It is in the plan that in the future the shared-memory parallelization techniques or the heterogeneous computing techniques can be used to parallize the velocity space.
+
+For the Vlasov equation solving module, the normal communication mode is used and each process send and receive information to/from their neighbors.
+
+For the Poisson solver, currently the code adopt the "Gather-and-Solve" mode. The global mesh information is used to construct the coefficient matrix for the Poisson solver at the initialization of the Poisson solver and the inverse matrix of this coefficient matrix is solved with the support of Eigen library and Intel Pardiso library. In each step, each process will calculate the local charge and these information will be gathered by the "solver" process, the "solver" process will then calculate the potential and E field based on this information and will broadcast the corresponding information for each processor. It is in the plan that in the future this code will support potential solver which solves the potential locally.
 
 ---
 ## **Reference**
