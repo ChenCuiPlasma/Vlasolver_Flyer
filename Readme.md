@@ -13,9 +13,11 @@ A high-performance grid-based kinetic Vlasov solver for computational plasma dyn
 
 ## 2. **Models and Equations for Vlasolver**
 The model used in this work is a Vlasov-Poisson system which is a kinetic description of the electrostatic collisionless plasma system(with or without the external B field). The Vlasov equation can be written as:
-$$
+<!-- $$
 \frac{\partial f_\alpha}{\partial t}+\boldsymbol{v}\cdot\nabla_{\boldsymbol{x}}f_{\alpha}+\boldsymbol{a}\cdot\nabla_{\boldsymbol{v}}f_{\alpha}=0
-$$
+$$ -->
+![equation](https://latex.codecogs.com/gif.latex?\frac{\partial&space;f_\alpha}{\partial&space;t}&plus;\boldsymbol{v}\cdot\nabla_{\boldsymbol{x}}f_{\alpha}&plus;\boldsymbol{a}\cdot\nabla_{\boldsymbol{v}}f_{\alpha}=0)
+
 where $f_\alpha(x, v, t)$ is the velocity distribution function. The acceleration term  is
 $$
 \boldsymbol{a}=\frac{F_{\alpha}}{m_{\alpha}}=\frac{q_{\alpha}\cdot\boldsymbol{E}+\boldsymbol{v}\times\boldsymbol{B}}{m_{\alpha}}=\frac{-q_{\alpha}\nabla\Phi+\boldsymbol{v}\times\boldsymbol{B}}{m_\alpha}
