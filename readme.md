@@ -47,13 +47,13 @@ The code will solve the Vlasov-Poisson system in the following process [2]:
 
 3. Solve the acceleration equations:
 <p align="center"><img src="https://rawgit.com/ChenCuiPlasma/Vlasolver_Flyer/master/svgs/8fbe7100b85b01a6bd8e8c517baff48a.svg?invert_in_darkmode" align=middle width=117.22523999999999pt height=33.769394999999996pt/></p>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for the whole time step:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for the whole time step:
 <p align="center"><img src="https://rawgit.com/ChenCuiPlasma/Vlasolver_Flyer/master/svgs/eff8950e906ca672e7d9b8f2ba32c9a0.svg?invert_in_darkmode" align=middle width=165.52304999999998pt height=16.376943pt/></p>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;where the <img src="https://rawgit.com/ChenCuiPlasma/Vlasolver_Flyer/master/svgs/950f751a9d811ec7ce234b576cf977a5.svg?invert_in_darkmode" align=middle width=15.238080000000004pt height=22.598730000000007pt/> is the solution of the characteristics of the acceleration equations.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;where the <img src="https://rawgit.com/ChenCuiPlasma/Vlasolver_Flyer/master/svgs/950f751a9d811ec7ce234b576cf977a5.svg?invert_in_darkmode" align=middle width=15.238080000000004pt height=22.598730000000007pt/> is the solution of the characteristics of the acceleration equations.
 
 4. Solve the spatial advection equations 
 <p align="center"><img src="https://rawgit.com/ChenCuiPlasma/Vlasolver_Flyer/master/svgs/34fa5b6ae77d6ac2f41f1872990baaa5.svg?invert_in_darkmode" align=middle width=116.74574999999999pt height=33.769394999999996pt/></p>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for half the time step: 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for half the time step: 
 <p align="center"><img src="https://rawgit.com/ChenCuiPlasma/Vlasolver_Flyer/master/svgs/4402889f6676055244687bcf55f8626a.svg?invert_in_darkmode" align=middle width=235.17119999999997pt height=18.269295pt/></p>
 
 ## 4. **Current Capabilities Phase Space Dimensions**
