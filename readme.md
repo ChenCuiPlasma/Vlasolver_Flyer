@@ -63,7 +63,7 @@ The code will solve the Vlasov-Poisson system in the following process [2]:
 * **2D2V** (with or without external B field both supported, **Serial** and **Parallel**) 
 
 ![](./pics/scheme/schematic_vlasov.png)
->*A schematic figure for 2D2V Vlasolver calculation domain*
+>*Schematic Plot for 2D2V Vlasolver calculation domain*
 
 ## 5. **Code Structures**
 The code adopts objective-oriented structure. And the classes(modules) can be categorized into several groups. 
@@ -88,9 +88,29 @@ The code adopts objective-oriented structure. And the classes(modules) can be ca
 ## 6. **Parallelization**
 Vlasolver is currently parallelized by doing domain decomposition  in physical domain. The physical domain is decomposed into local domains and assigned to the corresponding process. Informations are changed and stored in each local domain's guard cells. The velocity is not decomposed now and each process have a full set of velocity space. It is in the plan that in the future the shared-memory parallelization techniques or the heterogeneous computing techniques can be used to parallize the velocity space.
 
+![](./pics/parallel/domain_decomposition.png)
+>*Schematic plot for the domain decomposition in physical space*
+
 For the Vlasov equation solving module, the normal communication mode is used and each process send and receive information to/from their neighbors.
 
+![](./pics/parallel/communication_full.png)
+>*Schematic plot for the physical space communications*
+
 For the Poisson solver, currently the code adopt the "Gather-and-Solve" mode. The global mesh information is used to construct the coefficient matrix for the Poisson solver at the initialization of the Poisson solver and the inverse matrix of this coefficient matrix is solved with the support of Eigen library and Intel Pardiso library. In each step, each process will calculate the local charge and these information will be gathered by the "solver" process, the "solver" process will then calculate the potential and E field based on this information and will broadcast the corresponding information for each processor. It is in the plan that in the future this code will support potential solver which solves the potential locally.
+
+## 7. **Install Requirements**
+
+1. Compiler: 
+   * GNU <code>g++</code> compiler(>=5.4.0 and recommend 8.3.0) 
+   * Intel <code>icpc</code> compiler(tested 2019 release and 2020 release)  
+   * LLVM <code>clang++</code> compiler(>=11.0).
+
+2. Parallel Environment:
+   * OpenMPI (>=1.10) 
+
+3. Necessary Math Library:
+   * Intel <code>Math Kernel Library(MKL)</code>(>=2019 release)
+   * <code>Eigen</code> linear algebra library(>=3.3.9) 
 
 ---
 ## **Reference**
