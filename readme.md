@@ -3,13 +3,14 @@
 A high-performance grid-based kinetic Vlasov solver for computational plasma dynamics, main application scopes focus on electric propulsion plasma simulation and space plasma turbulence/instabilities simulation and basic plasma dynamics. This readme file serves to show the outline and preliminary results for this project.
 
 ## 1. **Author, Contributor and Maintainer**
-* **Author and Maintainer**
-          
-    Chen Cui (cuichen@usc.edu)
+<!-- * **Author and Maintainer**
+           -->
+   <!-- Chen Cui (cuichen@usc.edu)-->
+  * Chen Cui (cuichen@usc.edu)
 
-* **Contributor**  
+<!-- * **Contributor**  
     
-    Qiancheng Zhao (qianchez@usc.edu)
+    Qiancheng Zhao (qianchez@usc.edu) -->
 
 ## 2. **Models and Equations for Vlasolver**
 The model used in this work is a Vlasov-Poisson system which is a kinetic description of the electrostatic collisionless plasma system(with or without the external B field). The Vlasov equation can be written as:
