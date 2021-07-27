@@ -1,4 +1,4 @@
-# **Vlasolver: A Parallel Multi-dimensional Grid-Based Kinetic Vlasov Equation Solver**
+# **Vlasolver: A Parallel Multi-dimensional Grid-Based Kinetic Vlasov Solver**
 
 A parallel multi-dimensional grid-based kinetic Vlasov solver for computational plasma dynamics, main application scopes focus on electric propulsion plasma simulation and space plasma turbulence/instabilities simulation and basic plasma dynamics. This readme file serves to show the outline and preliminary results for this project.
 
