@@ -33,7 +33,7 @@ The methods below are used to discretize the PDEs to numerically solve the Vlaso
 
 * Operator Splitting.
 * Semi-Lagrangian time stepping.
-* Third Order Positive Flux Conservation[1] method on phase domain discretization. 
+* Third Order Positive Flux Conservation[1,4] method on phase domain discretization. 
 
 We use this term to describe the capability of handling the phase space dimensions: **xDyV** (x physical domain dimensions and y velocity domain dimensions). 
 
@@ -104,15 +104,41 @@ For the Poisson solver, currently the code adopt the "Gather-and-Solve" mode. Th
 >*Schematic plot for the "Gather-and-Solve" scheme*
 
 ## 7. **Verification and Validation**
+
 We first carry out a two-dimensional simulation of the
 two-stream instability as validation for the 2D2V Vlasolver. The initial set-up is set to be the same with the set-up in the work by Crouseilles [3].
-For this case, only the  electrons are included in the simulation.
-The electrons have two populations that counter-stream each other 
-in the <img src="svgs/247357cb886ab8ec3fc4061854468659.svg?invert_in_darkmode" align=middle width=15.3648pt height=14.102549999999994pt/> direction. The initial velocity distribution function is given as
+The initial velocity distribution function is given as
 <p align="center"><img src="svgs/eda8b6d99d19d5ec95b0dcdf4481ee22.svg?invert_in_darkmode" align=middle width=402.7353pt height=32.950664999999994pt/></p>
-The length of physical computational domain is set to be in the range [0, 4pi] in both x and y direction under the normalized unit. The length of velocity computational domain is set to be in the range [-9, 9] in both v_x and v_y direction under the normalized unit. 128 computational cells are used on each direction of the discretized phase space domain. Thus there are about 0.26 billion cells. Since the initial perturbation is in the x direction and velocity difference is in the v_x direction, the instability will basically grow along the x direction. Reduce order operations will be done to visualize the four-dimensional velocity distribution function datas by integrating along the y and v_y direction following Crouseilles's work[3]. The boundary conditions for the velocity space are set to be "cut-off" boundary condition and the physical space is set to have periodic boundary conditions.
+The boundary conditions for the velocity space are set to be "cut-off" boundary condition and the physical space is set to have periodic boundary conditions.
 
-## 7. **Install Requirements**
+![](./pics/ts/two-stream.png)
+>*Contour of integrated velocity distribution function at different time moment*
+
+Figure above shows the evolution history of the integrated velocity distribution function. The vortex-like structure is seen clearly to grow in the figure and the vortex-like structure corresponds to the nonlinear saturation of the instability. 
+
+We next consider Landau damping. The simulation setup is similar to that in Filbet's work[1]. The initial VDF is set to be 
+<p align="center"><img src="svgs/caa3a0560cc74f9fae68158f4c872dc2.svg?invert_in_darkmode" align=middle width=399.0723pt height=32.950664999999994pt/></p>
+
+This initial set-up corresponds to the Linear Landau damping along the diagonal line of the physical domain. 4 processes are used to parallelized the simulation and for a 10000 steps run the computational time is approximately 1 hour 3 minutes on an Intel i7-7700 workstation.
+Figure shown below shows the electric field energy in the normalized scale. The red dashed line shows the linear theory predicted slope. It is shown the simulation results correspond with the theoretical predicted value well.
+
+
+A nonlinear Landau damping test case is also performed under 2D2V phase space. The initial VDF is set to be
+<p align="center"><img src="svgs/12a82e7d70a9c13d01508fdf3ccea4f7.svg?invert_in_darkmode" align=middle width=408.1869pt height=32.950664999999994pt/></p>
+This perturbation will lead the Landau damping to grow along the diagonal direction of the 2D physical domain.  4 processes are used to parallelized the simulation and for a 2500 steps run the computational time is approximately 0.33 hours on a Intel i7-7700 workstation.
+Figure shows the electric field energy in the normalized scale and the data agrees with the theory well.
+
+![](./pics/landaudamping/landau.png)
+>*Electric field energy history for Landau Damping cases. (a). Linear Landau Damping. (b). Non-linear
+Landau Damping.*
+
+<!-- ## 8. **Performance Test**
+
+In order to test the performance of the code, the Two-stream instability case shown above is used as a benchmark. All of the simulation runs mentioned here are carried out on the Discovery cluster of University of Southern California Center of Advanced Research Computing. The information of the computing node is listed in the table below. -->
+
+
+
+## 8. **Install Requirements**
 
 1. Compiler: 
    * GNU <code>g++</code> compiler(>=5.4.0 and recommend 8.3.0) 
@@ -124,10 +150,25 @@ The length of physical computational domain is set to be in the range [0, 4pi] i
 
 3. Necessary Math Library:
    * Intel <code>Math Kernel Library(MKL)</code>(>=2019 release)
-   * <code>Eigen</code> linear algebra library(>=3.3.9) 
+   * <code>Eigen</code> linear algebra library(>=3.3.9)
+
+## 9. **Publications**
+
+[1] Cui, C., Wang, J., 2021. Development of a Parallel Multi-dimensional Grid-based Vlasov Solver for Plasma Plume Simulation. In AIAA Propulsion and Energy 2021 Forum (To be published soon).
+
+[2] Cui, C., Huang, Z., Hu, Y. and Wang, J., 2019. Grid-Based Kinetic Simulations of Collisionless Plasma Expansion.
+
+[3] Cui, C., Hu, Y. and Wang, J., 2019. Direct Grid-Based Vlasov Simulation of Collisionless Plasma Expansion of Ion Thruster Plume. In AIAA Propulsion and Energy 2019 Forum (p. 3992).
+
+
 
 ---
 ## **Reference**
 [1] Filbet, F., Sonnendrücker, E. and Bertrand, P., 2001. Conservative numerical schemes for the Vlasov equation. Journal of Computational Physics, 172(1), pp.166-187.
 
 [2] Cheng, C.Z. and Knorr, G., 1976. The integration of the Vlasov equation in configuration space. Journal of Computational Physics, 22(3), pp.330-351.
+
+[3] Crouseilles, N., Gutnic, M., Latu, G., and Sonnendrücker, E., 2008. Comparison of two Eulerian solvers for the four-dimensional
+Vlasov equation: Part II. Communications in nonlinear science and numerical simulation, 13(1), pp.94–99.
+
+[4] Umeda, T., 2008. A conservative and non-oscillatory scheme for Vlasov code simulations. Earth, planets and space, 60(7), pp.773–779.
