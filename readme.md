@@ -14,17 +14,17 @@ A parallel multi-dimensional grid-based kinetic Vlasov solver for computational 
 
 ## 2. **Models and Equations for Vlasolver**
 The model used in this work is a Vlasov-Poisson system which is a kinetic description of the electrostatic collisionless plasma system(with or without the external B field). The Vlasov equation can be written as:
-<p align="center"><img src="svgs/e71a173cc8644e32041f22b26ed65be0.svg?invert_in_darkmode" align=middle width=223.32420000000002pt height=33.769394999999996pt/></p>
+<p align="center"><img src="https://rawgit.com/ChenCuiPlasma/Vlasolver_Flyer (fetch/master/svgs/e71a173cc8644e32041f22b26ed65be0.svg?invert_in_darkmode" align=middle width=223.32420000000002pt height=33.769394999999996pt/></p>
 The acceleration term  is
-<p align="center"><img src="svgs/4e9c9dc1fcd13167b1b06e538ca9b266.svg?invert_in_darkmode" align=middle width=337.81604999999996pt height=36.0987pt/></p>
+<p align="center"><img src="https://rawgit.com/ChenCuiPlasma/Vlasolver_Flyer (fetch/master/svgs/6980794f373c8a1029e9c3189e0f037b.svg?invert_in_darkmode" align=middle width=367.30814999999996pt height=37.144965pt/></p>
 in which the external B field is included and
-<p align="center"><img src="svgs/cafed958a96d9b7c88fef7f83b5c1283.svg?invert_in_darkmode" align=middle width=207.52875pt height=36.0987pt/></p>
+<p align="center"><img src="https://rawgit.com/ChenCuiPlasma/Vlasolver_Flyer (fetch/master/svgs/cafed958a96d9b7c88fef7f83b5c1283.svg?invert_in_darkmode" align=middle width=207.52875pt height=36.0987pt/></p>
 in which the external B field is not included.
 
-The  electric potential. <img src="svgs/5e16cba094787c1a10e568c61c63a5fe.svg?invert_in_darkmode" align=middle width=11.827860000000003pt height=22.381919999999983pt/> needs to be solved self-consistently  using the Poisson equation
-<p align="center"><img src="svgs/e4c23b7c5a4401a89f04a5c6cc37dcff.svg?invert_in_darkmode" align=middle width=201.59535pt height=16.376943pt/></p> 
+The  electric potential. <img src="https://rawgit.com/ChenCuiPlasma/Vlasolver_Flyer (fetch/master/svgs/5e16cba094787c1a10e568c61c63a5fe.svg?invert_in_darkmode" align=middle width=11.827860000000003pt height=22.381919999999983pt/> needs to be solved self-consistently  using the Poisson equation
+<p align="center"><img src="https://rawgit.com/ChenCuiPlasma/Vlasolver_Flyer (fetch/master/svgs/e4c23b7c5a4401a89f04a5c6cc37dcff.svg?invert_in_darkmode" align=middle width=201.59535pt height=16.376943pt/></p> 
 The macroscopic properties of the plasma are described  by the moments  of the VDF
-<p align="center"><img src="svgs/d05e36e8240cc66d11f716eb815eb277.svg?invert_in_darkmode" align=middle width=280.92075pt height=42.78037499999999pt/></p>
+<p align="center"><img src="https://rawgit.com/ChenCuiPlasma/Vlasolver_Flyer (fetch/master/svgs/d05e36e8240cc66d11f716eb815eb277.svg?invert_in_darkmode" align=middle width=280.92075pt height=42.78037499999999pt/></p>
 
 ## 3. **Simulation Methods and Computing Algorithm**
 The phase space(both physical and velocity space) will be discretized into computational mesh. The partial differential equations in the Vlasov-Poisson system will be solved directly on the mesh. While the Vlasov-Poisson system  is a non-linear system, the Vlasov equation itself is a first-order hyperbolic partial differential equation (PDE).  Many numerical schemes have been developed to  solve hyperbolic PDEs.
@@ -40,23 +40,23 @@ We use this term to describe the capability of handling the phase space dimensio
 The code will solve the Vlasov-Poisson system in the following process [2]:
 
 1. Solve the spatial advection equations 
-<p align="center"><img src="svgs/34fa5b6ae77d6ac2f41f1872990baaa5.svg?invert_in_darkmode" align=middle width=116.74574999999999pt height=33.769394999999996pt/></p>
+<p align="center"><img src="https://rawgit.com/ChenCuiPlasma/Vlasolver_Flyer (fetch/master/svgs/34fa5b6ae77d6ac2f41f1872990baaa5.svg?invert_in_darkmode" align=middle width=116.74574999999999pt height=33.769394999999996pt/></p>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for half the time step: 
-<p align="center"><img src="svgs/e71d7e34fbbac48cbb5d0ccd0284ef11.svg?invert_in_darkmode" align=middle width=211.7907pt height=16.376943pt/></p>
+<p align="center"><img src="https://rawgit.com/ChenCuiPlasma/Vlasolver_Flyer (fetch/master/svgs/e71d7e34fbbac48cbb5d0ccd0284ef11.svg?invert_in_darkmode" align=middle width=211.7907pt height=16.376943pt/></p>
 
 2. Update the Poisson equation:
-<p align="center"><img src="svgs/627d59d905493b86faf3df59f7e58760.svg?invert_in_darkmode" align=middle width=81.406875pt height=31.913475pt/></p>
+<p align="center"><img src="https://rawgit.com/ChenCuiPlasma/Vlasolver_Flyer (fetch/master/svgs/627d59d905493b86faf3df59f7e58760.svg?invert_in_darkmode" align=middle width=81.406875pt height=31.913475pt/></p>
 
 3. Solve the acceleration equations:
-<p align="center"><img src="svgs/8fbe7100b85b01a6bd8e8c517baff48a.svg?invert_in_darkmode" align=middle width=117.22523999999999pt height=33.769394999999996pt/></p>
+<p align="center"><img src="https://rawgit.com/ChenCuiPlasma/Vlasolver_Flyer (fetch/master/svgs/8fbe7100b85b01a6bd8e8c517baff48a.svg?invert_in_darkmode" align=middle width=117.22523999999999pt height=33.769394999999996pt/></p>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for the whole time step:
-<p align="center"><img src="svgs/eff8950e906ca672e7d9b8f2ba32c9a0.svg?invert_in_darkmode" align=middle width=165.52304999999998pt height=16.376943pt/></p>
+<p align="center"><img src="https://rawgit.com/ChenCuiPlasma/Vlasolver_Flyer (fetch/master/svgs/eff8950e906ca672e7d9b8f2ba32c9a0.svg?invert_in_darkmode" align=middle width=165.52304999999998pt height=16.376943pt/></p>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;where the v star is the solution of the characteristics of the acceleration equations.
 
 4. Solve the spatial advection equations 
-<p align="center"><img src="svgs/34fa5b6ae77d6ac2f41f1872990baaa5.svg?invert_in_darkmode" align=middle width=116.74574999999999pt height=33.769394999999996pt/></p>
+<p align="center"><img src="https://rawgit.com/ChenCuiPlasma/Vlasolver_Flyer (fetch/master/svgs/34fa5b6ae77d6ac2f41f1872990baaa5.svg?invert_in_darkmode" align=middle width=116.74574999999999pt height=33.769394999999996pt/></p>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for half the time step: 
-<p align="center"><img src="svgs/4402889f6676055244687bcf55f8626a.svg?invert_in_darkmode" align=middle width=235.17119999999997pt height=18.269295pt/></p>
+<p align="center"><img src="https://rawgit.com/ChenCuiPlasma/Vlasolver_Flyer (fetch/master/svgs/4402889f6676055244687bcf55f8626a.svg?invert_in_darkmode" align=middle width=235.17119999999997pt height=18.269295pt/></p>
 
 ## 4. **Current Capabilities of Phase Space Dimensions**
 
@@ -108,7 +108,7 @@ For the Poisson solver, currently the code adopt the "Gather-and-Solve" mode. Th
 We first carry out a two-dimensional simulation of the
 two-stream instability as validation for the 2D2V Vlasolver. The initial set-up is set to be the same with the set-up in the work by Crouseilles [3].
 The initial velocity distribution function is given as
-<p align="center"><img src="svgs/eda8b6d99d19d5ec95b0dcdf4481ee22.svg?invert_in_darkmode" align=middle width=402.7353pt height=32.950664999999994pt/></p>
+<p align="center"><img src="https://rawgit.com/ChenCuiPlasma/Vlasolver_Flyer (fetch/master/svgs/eda8b6d99d19d5ec95b0dcdf4481ee22.svg?invert_in_darkmode" align=middle width=402.7353pt height=32.950664999999994pt/></p>
 The boundary conditions for the velocity space are set to be "cut-off" boundary condition and the physical space is set to have periodic boundary conditions.
 
 ![](./pics/ts/two-stream.png)
@@ -117,14 +117,14 @@ The boundary conditions for the velocity space are set to be "cut-off" boundary 
 Figure above shows the evolution history of the integrated velocity distribution function. The vortex-like structure is seen clearly to grow in the figure and the vortex-like structure corresponds to the nonlinear saturation of the instability. 
 
 We next consider Landau damping. The simulation setup is similar to that in Filbet's work[1]. The initial VDF is set to be 
-<p align="center"><img src="svgs/caa3a0560cc74f9fae68158f4c872dc2.svg?invert_in_darkmode" align=middle width=399.0723pt height=32.950664999999994pt/></p>
+<p align="center"><img src="https://rawgit.com/ChenCuiPlasma/Vlasolver_Flyer (fetch/master/svgs/caa3a0560cc74f9fae68158f4c872dc2.svg?invert_in_darkmode" align=middle width=399.0723pt height=32.950664999999994pt/></p>
 
 This initial set-up corresponds to the Linear Landau damping along the diagonal line of the physical domain. 4 processes are used to parallelized the simulation and for a 10000 steps run the computational time is approximately 1 hour 3 minutes on an Intel i7-7700 workstation.
 Figure shown below shows the electric field energy in the normalized scale. The red dashed line shows the linear theory predicted slope. It is shown the simulation results correspond with the theoretical predicted value well.
 
 
 A nonlinear Landau damping test case is also performed under 2D2V phase space. The initial VDF is set to be
-<p align="center"><img src="svgs/12a82e7d70a9c13d01508fdf3ccea4f7.svg?invert_in_darkmode" align=middle width=408.1869pt height=32.950664999999994pt/></p>
+<p align="center"><img src="https://rawgit.com/ChenCuiPlasma/Vlasolver_Flyer (fetch/master/svgs/12a82e7d70a9c13d01508fdf3ccea4f7.svg?invert_in_darkmode" align=middle width=408.1869pt height=32.950664999999994pt/></p>
 This perturbation will lead the Landau damping to grow along the diagonal direction of the 2D physical domain.  4 processes are used to parallelized the simulation and for a 2500 steps run the computational time is approximately 0.33 hours on a Intel i7-7700 workstation.
 Figure shows the electric field energy in the normalized scale and the data agrees with the theory well.
 
